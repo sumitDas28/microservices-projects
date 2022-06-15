@@ -13,7 +13,7 @@ Voting App consists of 3 microservices written in Java language that talk to eac
 
 ![](voting-app.drawio.png)
 
-| Service                    | Language |                                                                                                                                                                                                       Description |
+| Service                    | Language |                                                                                                                                     Description                                                                   |
 |----------------------------|:--------:|------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------:|
 | voter-registration-service |   Java   |                                                                                                      Stores the voter registration details like Voter ID, Name, DOB, Address, Phone Number etc. and retrieves it. |
 | vote-submission-service    |   Java   | Validates the voter details by calling the voter registration service and then stores the vote submission details like Voter ID, Leader, Party and Vote Type Details. Also retrieves the vote submission details. |
