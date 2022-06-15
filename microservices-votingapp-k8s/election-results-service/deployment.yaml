@@ -1,0 +1,56 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  labels:
+    app: election-results
+  name: election-results
+  namespace: default
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: election-results
+  strategy:
+    rollingUpdate:
+      maxSurge: 25%
+      maxUnavailable: 25%
+    type: RollingUpdate
+  template:
+    metadata:
+      labels:
+        app: election-results
+    spec:
+      containers:
+      - image: sumitdas28/election-results-service:0.0.1-SNAPSHOT
+        imagePullPolicy: IfNotPresent
+        name: election-results-service
+        env:
+          - name: VOTER_SUBMISSION_URI
+            value: http://vote-submission
+        readinessProbe:
+          httpGet:
+            port: 8200
+            path: /actuator/health/readiness
+        livenessProbe:
+          httpGet:
+            port: 8200
+            path: /actuator/health/liveness
+      restartPolicy: Always
+---
+  apiVersion: v1
+  kind: Service
+  metadata:
+    labels:
+      app: election-results
+    name: election-results
+    namespace: default
+  spec:
+    ports:
+    - port: 8200
+      protocol: TCP
+      targetPort: 8200
+    selector:
+      app: election-results
+    sessionAffinity: None
+    type: LoadBalancer
+
