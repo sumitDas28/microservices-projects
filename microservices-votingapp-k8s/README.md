@@ -13,11 +13,11 @@ Voting App consists of 3 microservices written in Java language that talk to eac
 
 ![](voting-app.drawio.png)
 
-| Service                    | Language |                                                                                                                                     Description                                                                   |
-|----------------------------|:--------:|------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------:|
-| voter-registration-service |   Java   |                                                                                                      Stores the voter registration details like Voter ID, Name, DOB, Address, Phone Number etc. and retrieves it. |
-| vote-submission-service    |   Java   | Validates the voter details by calling the voter registration service and then stores the vote submission details like Voter ID, Leader, Party and Vote Type Details. Also retrieves the vote submission details. |
-| election-results-service   |   Java   |                    Runs a scheduler job every 30 seconds to call the vote submission service to fetch the submitted vote details and calculate the election results and store it. Retrieves the election results. |
+| Service                                              | Language      | Description                                                                                                                                          |
+| ---------------------------------------------------- | ------------- | ---------------------------------------------------------------------------------------------------------------------------------------------------- |
+| voter-registration-service (VRS)                     | Java          | Stores the voter registration details like Voter ID, Name, DOB, Address, Phone Number etc. and retrieves it.                                         |
+| vote-submission-service (VSS)                        | Java          | Validates the voter details by calling VRS and then stores the vote submission details and retrieves it.                                             |
+| election-results-service (ESS)                       | Java          | Scheduler job runs every 30 seconds to call the VSS to fetch submitted vote details. Calculates and stores the election results and retrieves it.    |
 
 
 ## Deployment
